@@ -1,0 +1,29 @@
+specVersion: 0.0.5
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: TellorMagic
+    network: {{network}}
+    source:
+      address: "{{TellorMagic.address}}"
+      abi: TellorMagic
+      startBlock: {{TellorMagic.block}}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities: []
+      abis:
+        - name: TellorMagic
+          file: ./abis/TellorMagic.json
+      eventHandlers:
+        - event: Staked(indexed address,uint256)
+          handler: handleStake
+        - event: WithdrawRequested(indexed address,uint256)
+          handler: handleWithdrawRequest
+        - event: Withdrawed(indexed address,uint256)
+          handler: handleWithdraw
+        - event: RewardClaimed(indexed address,uint256)
+          handler: handleClaimReward
+      file: ./src/tellor-magic.ts

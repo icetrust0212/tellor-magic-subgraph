@@ -1,0 +1,24 @@
+{
+  "name": "tellor-magic-subgraph",
+  "license": "UNLICENSED",
+  "scripts": {
+    "codegen": "graph codegen",
+    "build:mainnet": "yarn prepare:mainnet && yarn codegen && graph build",
+    "prepare:mainnet": "mustache ./config/mainnet.json template.yaml > subgraph.yaml",
+    "deploy:mainnet": "yarn prepare:mainnet && yarn codegen && graph deploy --product hosted-service icetrust0212/tellor-mainnet",
+
+    "build:mumbai": "yarn prepare:mumbai && yarn codegen && graph build",
+    "prepare:mumbai": "mustache ./config/mumbai.json template.yaml > subgraph.yaml",
+    "deploy:mumbai": "yarn prepare:mumbai && yarn codegen && graph deploy --product hosted-service icetrust0212/tellor-mumbai",
+
+    "test": "graph test"
+  },
+  "dependencies": {
+    "@graphprotocol/graph-cli": "^0.68.0",
+    "@graphprotocol/graph-ts": "^0.32.0",
+    "mustache": "^4.2.0"
+  },
+  "devDependencies": {
+    "matchstick-as": "0.5.0"
+  }
+}

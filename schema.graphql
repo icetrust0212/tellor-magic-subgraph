@@ -1,0 +1,11 @@
+type User @entity {
+  id: ID!
+
+  address: Bytes!
+  totalStakedAmount: BigDecimal!
+  lockedAmount: BigDecimal!
+  availableRewards: BigDecimal!
+  totalRewards: BigDecimal!
+
+  lockedTimestamp: BigInt!
+}
